@@ -66,7 +66,7 @@ local_update_env_new_site_variables()
     run_function env_update_variable $LOCAL_FILE_PATH "NGINX_LETSENCRYPT_LOG_MAX_FILE" "$LETSENCRYPT_LOG_MAX_FILE"
 
     # Nginx timouts
-    run_function env_update_variable $LOCAL_FILE_PATH "NGINX_TIMEOUT" "$NGINX_TIMEOUT"
+#    run_function env_update_variable $LOCAL_FILE_PATH "NGINX_TIMEOUT" "$NGINX_TIMEOUT"
 
     # Port bindings
     run_function env_update_variable $LOCAL_FILE_PATH "DOCKER_HTTP_" "$DOCKER_HTTP"
