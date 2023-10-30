@@ -14,6 +14,7 @@ services:
 #      - "${IPv6:-::0}:${DOCKER_HTTPS:-443}:443"
     environment:
       SSL_POLICY: ${SSL_POLICY:-Mozilla-Intermediate}
+      NGINX_TIMEOUT: ${NGINX_TIMEOUT:-60}
 #      DEFAULT_HOST: ${DEFAULT_HOST}
 #      ENABLE_IPV6: "true"
     volumes:
@@ -62,7 +63,6 @@ services:
       NGINX_DOCKER_GEN_CONTAINER: ${DOCKER_GEN_SEVICE_NAME:-nginx-proxy-automation-gen}
       NGINX_PROXY_CONTAINER: ${NGINX_WEB_SEVICE_NAME:-nginx-proxy-automation-web}
       DEFAULT_EMAIL: ${DEFAULT_EMAIL:-mail@yourdomain.tld}
-      NGINX_TIMEOUT: ${NGINX_TIMEOUT:-60}
     logging:
       driver: ${NGINX_LETSENCRYPT_LOG_DRIVER:-json-file}
       options:
