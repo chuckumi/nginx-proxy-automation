@@ -480,6 +480,15 @@ while [[ $# -gt 0 ]]; do
     shift 1
     ;;
 
+  # Nginx timeouts
+#  -to)
+#    ARG_NGINX_TIMEOUT="${2}"
+#    if [[ ARG_NGINX_TIMEOUT == "" ]]; then
+#      ARG_NGINX_TIMEOUT = 60
+#    fi
+#    shift 1
+#    ;;
+
   # Other options
   --update-nginx-template)
     UPDATE_NGINX_TEMPLATE=true
