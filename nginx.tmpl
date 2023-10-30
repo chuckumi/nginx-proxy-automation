@@ -286,6 +286,11 @@ server {
 	ssl_session_cache shared:SSL:50m;
 	ssl_session_tickets off;
 
+	client_header_timeout {{ $.Env.NGINX_TIMEOUT }};
+    client_body_timeout {{ $.Env.NGINX_TIMEOUT }};
+    send_timeout {{ $.Env.NGINX_TIMEOUT }};
+    keepalive_timeout {{ $.Env.NGINX_TIMEOUT }};
+
 	ssl_certificate /etc/nginx/certs/{{ (printf "%s.crt" $cert) }};
 	ssl_certificate_key /etc/nginx/certs/{{ (printf "%s.key" $cert) }};
 
@@ -321,6 +326,7 @@ server {
 		grpc_pass {{ trim $proto }}://{{ trim $upstream_name }};
 		{{ else }}
 		proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
+        proxy_read_timeout {{ $.Env.NGINX_TIMEOUT }};
 		{{ end }}
 
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
