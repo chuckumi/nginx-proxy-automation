@@ -289,7 +289,7 @@ server {
 	ssl_session_cache shared:SSL:50m;
 	ssl_session_tickets off;
 
-    ## client_header_timeout {{ $timeout | or 60 }}
+    ## client_header_timeout {{ $timeout | defaultInt 60 }}
 	client_header_timeout {{ $timeout | or 60 }};
     client_body_timeout {{ $timeout | or 60 }};
     send_timeout {{ $timeout | or 60 }};
