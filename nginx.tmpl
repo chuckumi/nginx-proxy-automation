@@ -187,6 +187,7 @@ upstream {{ $upstream_name }} {
 			{{ if (and (ne $containerNetwork.Name "ingress") (or (eq $knownNetwork.Name $containerNetwork.Name) (eq $knownNetwork.Name "host"))) }}
 				## Can be connected with "{{ $containerNetwork.Name }}"
 				## network timeout "{{ $container.Env.NGINX_TIMEOUT }}"
+				{{ $timeout = $container.Env.NGINX_TIMEOUT | or 65 }}
 
 				{{/* If only 1 port exposed, use that */}}
 				{{ if eq $addrLen 1 }}
