@@ -174,7 +174,7 @@ server {
 {{ $is_regexp := hasPrefix "~" $host }}
 {{ $upstream_name := when $is_regexp (sha1 $host) $host }}
 
-{{ $timeout := 60 }}
+{{ $timeout := 62 }}
 
 # {{ $host }}
 upstream {{ $upstream_name }} {
