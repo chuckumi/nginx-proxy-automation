@@ -188,7 +188,7 @@ upstream {{ $upstream_name }} {
 				## Can be connected with "{{ $containerNetwork.Name }}"
 				## network timeout "{{ $container.Env.NGINX_TIMEOUT }}"
 				{{ $timeout = $container.Env.NGINX_TIMEOUT | or 65 }}
-
+                ## network timeout after "{{ $timeout }}"
 				{{/* If only 1 port exposed, use that */}}
 				{{ if eq $addrLen 1 }}
 					{{ $address := index $container.Addresses 0 }}
