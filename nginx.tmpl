@@ -289,7 +289,7 @@ server {
 	ssl_session_cache shared:SSL:50m;
 	ssl_session_tickets off;
 
-    ## client_header_timeout {{ $container.Env.NGINX_TIMEOUT | or "63" }}
+    ## client_header_timeout {{ $timeout | or "63" }}
 	client_header_timeout {{ $timeout }};
     client_body_timeout {{ $timeout }};
     send_timeout {{ $timeout }};
