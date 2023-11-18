@@ -189,7 +189,7 @@ upstream {{ $upstream_name }} {
 				{{ if $container.Env.NGINX_TIMEOUT }}
                   {{ $timeout = $container.Env.NGINX_TIMEOUT }}
                 {{ else }}
-                  {{ $timeout = 120 }}
+                  {{ $timeout = 60 }}
                 {{ end }}
 				## Network timeout "{{ $container.Env.NGINX_TIMEOUT }}" / "{{ $timeout }}"
 				{{/* If only 1 port exposed, use that */}}
@@ -294,10 +294,10 @@ server {
 	ssl_session_tickets off;
 
     ## client_header_timeout {{ $timeout }}
-	client_header_timeout {{ $timeout }}
-    client_body_timeout {{ $timeout }}
-    send_timeout {{ $timeout }}
-    keepalive_timeout {{ $timeout }}
+	client_header_timeout {{ $timeout }};
+    client_body_timeout {{ $timeout }};
+    send_timeout {{ $timeout }};
+    keepalive_timeout {{ $timeout }};
 
 	ssl_certificate /etc/nginx/certs/{{ (printf "%s.crt" $cert) }};
 	ssl_certificate_key /etc/nginx/certs/{{ (printf "%s.key" $cert) }};
