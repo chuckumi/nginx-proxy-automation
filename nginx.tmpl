@@ -175,6 +175,7 @@ server {
 {{ $upstream_name := when $is_regexp (sha1 $host) $host }}
 
 {{ $timeout := 62 }}
+{{ $timeout2 := 64 }}
 
 # {{ $host }}
 upstream {{ $upstream_name }} {
