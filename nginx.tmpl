@@ -174,8 +174,7 @@ server {
 {{ $is_regexp := hasPrefix "~" $host }}
 {{ $upstream_name := when $is_regexp (sha1 $host) $host }}
 
-{{ $timeout := 62 }}
-{{ $timeout2 := 64 }}
+{{ $timeout := 120 }}
 
 # {{ $host }}
 upstream {{ $upstream_name }} {
@@ -187,7 +186,6 @@ upstream {{ $upstream_name }} {
 		{{ range $containerNetwork := $container.Networks }}
 			{{ if (and (ne $containerNetwork.Name "ingress") (or (eq $knownNetwork.Name $containerNetwork.Name) (eq $knownNetwork.Name "host"))) }}
 				## Can be connected with "{{ $containerNetwork.Name }}"
-				{{ $timeout2 := $container.Env.NGINX_TIMEOUT }}
 				{{ $timeout = $container.Env.NGINX_TIMEOUT }}
 				## network timeout aa "{{ $container.Env.NGINX_TIMEOUT }}"
 				## network timeout after "{{ $timeout2 }}"
