@@ -186,8 +186,12 @@ upstream {{ $upstream_name }} {
 		{{ range $containerNetwork := $container.Networks }}
 			{{ if (and (ne $containerNetwork.Name "ingress") (or (eq $knownNetwork.Name $containerNetwork.Name) (eq $knownNetwork.Name "host"))) }}
 				## Can be connected with "{{ $containerNetwork.Name }}"
-				{{ $timeout = $container.Env.NGINX_TIMEOUT }}
-				## Network timeout "{{ $container.Env.NGINX_TIMEOUT }}"
+				{{ if $container.Env.NGINX_TIMEOUT }}
+                  {{ $timeout = $container.Env.NGINX_TIMEOUT }}
+                {{ else }}
+                  {{ $timeout = 60 }}
+                {{ end }}
+				## Network timeout "{{ $container.Env.NGINX_TIMEOUT }}" / "{{ $timeout }}"
 				{{/* If only 1 port exposed, use that */}}
 				{{ if eq $addrLen 1 }}
 					{{ $address := index $container.Addresses 0 }}
@@ -289,7 +293,7 @@ server {
 	ssl_session_cache shared:SSL:50m;
 	ssl_session_tickets off;
 
-    ## client_header_timeout {{ $timeout | defaultInt 60 }}
+    ## client_header_timeout {{ $timeout }}
 	client_header_timeout {{ $timeout | or 60 }};
     client_body_timeout {{ $timeout | or 60 }};
     send_timeout {{ $timeout | or 60 }};
